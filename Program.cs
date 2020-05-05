@@ -20,32 +20,7 @@ namespace eHospital_PACS_Integration
         public static async Task Main(string[] args)
         {
 
-            string url = "https://demo.orthanc-server.com/instances";
-
-            //We will make a GET request to a really cool website...
-
-            string baseUrl = "https://demo.orthanc-server.com/instances";
-            //The 'using' will help to prevent memory leaks.
-            //Create a new instance of HttpClient
-            using (HttpClient client = new HttpClient())
-
-            //Setting up the response...         
-
-            using (HttpResponseMessage res = await client.GetAsync(baseUrl))
-            using (HttpContent content = res.Content)
-            {
-                string data = await content.ReadAsStringAsync();
-                if (data != null)
-                {
-                    Console.WriteLine(data);
-                }
-            }
-
-
-
-
             CreateHostBuilder(args).Build().Run();
-
 
         }
 
