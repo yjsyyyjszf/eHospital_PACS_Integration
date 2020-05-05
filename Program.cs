@@ -3,43 +3,48 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
+
 namespace eHospital_PACS_Integration
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
 
+            string url = "https://demo.orthanc-server.com/instances";
 
-            string url = "https://YOUR_COMPANY_HERE.beebole-apps.com/api";
-            string data = "{\"service\":\"absence.list\", \"company_id\":3}";
+            //We will make a GET request to a really cool website...
 
-            WebRequest myReq = WebRequest.Create(url);
-            myReq.Method = "POST";
-            myReq.ContentLength = data.Length;
-            myReq.ContentType = "application/json; charset=UTF-8";
+            string baseUrl = "https://demo.orthanc-server.com/instances";
+            //The 'using' will help to prevent memory leaks.
+            //Create a new instance of HttpClient
+            using (HttpClient client = new HttpClient())
 
-            string usernamePassword = "YOUR API TOKEN HERE" + ":" + "x";
+            //Setting up the response...         
 
-            UTF8Encoding enc = new UTF8Encoding();
-
-            myReq.Headers.Add("Authorization", "Basic " + Convert.ToBase64String(enc.GetBytes(usernamePassword)));
-
-
-            using (Stream ds = myReq.GetRequestStream())
+            using (HttpResponseMessage res = await client.GetAsync(baseUrl))
+            using (HttpContent content = res.Content)
             {
-                ds.Write(enc.GetBytes(data), 0, data.Length);
+                string data = await content.ReadAsStringAsync();
+                if (data != null)
+                {
+                    Console.WriteLine(data);
+                }
             }
 
 
+
+
+            CreateHostBuilder(args).Build().Run();
 
 
         }
