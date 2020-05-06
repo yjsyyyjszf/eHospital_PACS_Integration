@@ -4,35 +4,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Http;
+
 
 namespace eHospital_PACS_Integration.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class PACSController : ControllerBase
     {
-        public string baseUrl = "https://demo.orthanc-server.com/";
 
         // GET: api/PACS
-        [Route("instance")]
         [HttpGet]
-        public async Task<IEnumerable<string>> GetAsync()
+        public IEnumerable<string> Get()
         {
-
-            string url = baseUrl + "instances";
-            using (HttpClient client = new HttpClient())
-            using (HttpResponseMessage res = await client.GetAsync(url))
-            using (HttpContent content = res.Content)
-            {
-                string data = await content.ReadAsStringAsync();
-                if (data != null)
-                {
-                    Console.WriteLine(data);
-                }
-                return new string[] {data };
-            }
-
+            var data = Orthanc.Orthanc.InstanceAsync();
+            
             return new string[] { "value1", "value2" };
         }
 
@@ -47,6 +33,8 @@ namespace eHospital_PACS_Integration.Controllers
         [HttpPost]
         public void Post([FromBody] string value)
         {
+            int i = 1;
+            i++;
         }
 
         // PUT: api/PACS/5
