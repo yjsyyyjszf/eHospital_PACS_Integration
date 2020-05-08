@@ -8,22 +8,24 @@ using eHospital_PACS_Integration.Orthanc;
 using Newtonsoft.Json.Linq;
 using eHospital_PACS_Integration.Model;
 using Newtonsoft.Json;
+using Flurl.Http;
+using System.Text.RegularExpressions;
 
 namespace eHospital_PACS_Integration.Controllers
 {
-    [Route("api/[controller]/[Action]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class PACSController : ControllerBase
     {
 
         // GET: api/PACS
         [HttpGet]
-        public async Task<string> Get()
+        public async Task<object> Get()
         {
-            var data = await Orthanc.Orthanc.InstanceAsync();
-            var json = JsonConvert.SerializeObject(data);
-
-            return json;
+            var result = await Orthanc.Orthanc.InstanceAsync();
+            
+            
+            return result;
         }
 
         // GET: api/PACS/5

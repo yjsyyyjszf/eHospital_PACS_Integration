@@ -4,13 +4,14 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using eHospital_PACS_Integration.Model;
+using Newtonsoft.Json;
 
 namespace eHospital_PACS_Integration.Orthanc
 {
     public class Orthanc
     {
         public static string baseUrl = "https://demo.orthanc-server.com/";
-        public static async Task<string[]> InstanceAsync()
+        public static async Task<object> InstanceAsync()
         {
 
             string url = baseUrl + "instances";
@@ -21,6 +22,7 @@ namespace eHospital_PACS_Integration.Orthanc
             //Setting up the response...         
 
             using (HttpResponseMessage res = await client.GetAsync(url))
+           
             using (HttpContent content = res.Content)
             {
                 string data = await content.ReadAsStringAsync();
@@ -28,7 +30,10 @@ namespace eHospital_PACS_Integration.Orthanc
                 {
                     Console.WriteLine(data);
                 }
-                return new string[] { data };
+                
+                var jData = JsonConvert.DeserializeObject(new string[] { data }[0]);
+
+                return jData;
             }
 
         }

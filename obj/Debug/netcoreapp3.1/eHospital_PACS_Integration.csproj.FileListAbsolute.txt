@@ -88,5 +88,7 @@ E:\ETS\Code\eHospital_PACS_Integration\bin\Debug\netcoreapp3.1\ru\Microsoft.Code
 E:\ETS\Code\eHospital_PACS_Integration\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 E:\ETS\Code\eHospital_PACS_Integration\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 E:\ETS\Code\eHospital_PACS_Integration\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
-E:\ETS\Code\eHospital_PACS_Integration\obj\Debug\netcoreapp3.1\eHospital_PACS_Integration.MvcApplicationPartsAssemblyInfo.cache
 E:\ETS\Code\eHospital_PACS_Integration\obj\Debug\netcoreapp3.1\eHospital_PACS_Integration.csproj.CopyComplete
+E:\ETS\Code\eHospital_PACS_Integration\bin\Debug\netcoreapp3.1\Flurl.dll
+E:\ETS\Code\eHospital_PACS_Integration\bin\Debug\netcoreapp3.1\Flurl.Http.dll
+E:\ETS\Code\eHospital_PACS_Integration\obj\Debug\netcoreapp3.1\eHospital_PACS_Integration.MvcApplicationPartsAssemblyInfo.cache
