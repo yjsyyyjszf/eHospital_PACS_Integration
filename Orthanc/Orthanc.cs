@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using eHospital_PACS_Integration.Model;
 
 namespace eHospital_PACS_Integration.Orthanc
 {

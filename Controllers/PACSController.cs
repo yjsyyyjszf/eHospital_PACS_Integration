@@ -4,22 +4,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
+using eHospital_PACS_Integration.Orthanc;
+using Newtonsoft.Json.Linq;
+using eHospital_PACS_Integration.Model;
+using Newtonsoft.Json;
 
 namespace eHospital_PACS_Integration.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[Action]")]
     [ApiController]
     public class PACSController : ControllerBase
     {
 
         // GET: api/PACS
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<string> Get()
         {
-            var data = Orthanc.Orthanc.InstanceAsync();
-            
-            return new string[] { "value1", "value2" };
+            var data = await Orthanc.Orthanc.InstanceAsync();
+            var json = JsonConvert.SerializeObject(data);
+
+            return json;
         }
 
         // GET: api/PACS/5
