@@ -20,7 +20,7 @@ namespace eHospital_PACS_Integration.Controllers
 
         // GET: api/PACS
         [HttpGet]
-        public async Task<object> Get()
+        public async Task<string> Get()
         {
             var result = await Orthanc.Orthanc.InstanceAsync();
             

@@ -11,7 +11,7 @@ namespace eHospital_PACS_Integration.Orthanc
     public class Orthanc
     {
         public static string baseUrl = "https://demo.orthanc-server.com/";
-        public static async Task<object> InstanceAsync()
+        public static async Task<string> InstanceAsync()
         {
 
             string url = baseUrl + "instances";
@@ -25,15 +25,20 @@ namespace eHospital_PACS_Integration.Orthanc
            
             using (HttpContent content = res.Content)
             {
-                string data = await content.ReadAsStringAsync();
+                var data = await content.ReadAsStringAsync();
                 if (data != null)
                 {
                     Console.WriteLine(data);
                 }
-                
-                var jData = JsonConvert.DeserializeObject(new string[] { data }[0]);
 
-                return jData;
+                var compiledResult = data.Split(",").ToArray<string>().Select(c => new Instance { instance = c });
+
+
+
+
+                //var jData = JsonConvert.SerializeObject(compiledResult);
+
+                return data;
             }
 
         }
