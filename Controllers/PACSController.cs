@@ -20,13 +20,20 @@ namespace eHospital_PACS_Integration.Controllers
 
         // GET: api/PACS
         [HttpGet]
-        public async Task<string> Get()
+        public async Task<string> Get(string id)
         {
-            var result = await Orthanc.Orthanc.InstanceAsync();
-            
-            
+            var result = await Orthanc.Orthanc.InstanceGetAsync(id);
             return result;
         }
+
+        // POST: api/PACS
+        [HttpPost]
+        public async Task<string> Post([FromBody] string value)
+        {
+            var result = await Orthanc.Orthanc.InstancePostAsync();
+            return result;
+        }
+
 
         // GET: api/PACS/5
         [HttpGet("{id}", Name = "Get")]
@@ -35,13 +42,7 @@ namespace eHospital_PACS_Integration.Controllers
             return "value";
         }
 
-        // POST: api/PACS
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-            int i = 1;
-            i++;
-        }
+        
 
         // PUT: api/PACS/5
         [HttpPut("{id}")]

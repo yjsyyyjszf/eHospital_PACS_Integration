@@ -10,19 +10,32 @@ namespace eHospital_PACS_Integration.Orthanc
 {
     public class Orthanc
     {
+        private const string e_nf = "Not Found!";
         public static string baseUrl = "https://demo.orthanc-server.com/";
-        public static async Task<string> InstanceAsync()
+        public static async Task<string> InstanceGetAsync(string id)
+        {
+            string url = baseUrl + "instances";
+            if (id != "")
+                url = url + '/' + id;
+            using (HttpClient client = new HttpClient())
+
+            using (HttpResponseMessage res = await client.GetAsync(url))
+            using (HttpContent content = res.Content)
+            {
+                var data = await content.ReadAsStringAsync();
+                if(data != null)
+                    return data;
+            }
+            return e_nf;
+        }
+
+        public static async Task<string> InstancePostAsync()
         {
 
             string url = baseUrl + "instances";
-            //The 'using' will help to prevent memory leaks.
-            //Create a new instance of HttpClient
             using (HttpClient client = new HttpClient())
 
-            //Setting up the response...         
-
             using (HttpResponseMessage res = await client.GetAsync(url))
-           
             using (HttpContent content = res.Content)
             {
                 var data = await content.ReadAsStringAsync();
@@ -31,16 +44,11 @@ namespace eHospital_PACS_Integration.Orthanc
                     Console.WriteLine(data);
                 }
 
-                var compiledResult = data.Split(",").ToArray<string>().Select(c => new Instance { instance = c });
-
-
-
-
-                //var jData = JsonConvert.SerializeObject(compiledResult);
-
                 return data;
             }
 
         }
+
+
     }
 }

@@ -7,6 +7,8 @@ namespace eHospital_PACS_Integration.Model
 {
     public class Instance
     {
-        public string instance { get; set; }
+        public string ID { get; set; }
+        public string Path { get; set; }
+        public string Status { get; set; }
     }
 }
